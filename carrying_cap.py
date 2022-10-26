@@ -28,8 +28,14 @@ def calc_car_cap(r,N,cp):
  # K = (r * N * (1-N) / cp)
     C = []
     for a, b, c in itertools.zip_longest(r, N, cp):
-        K = round((a * b * (1 - b) / c) * -1, 2)
-        C.append(K)
+        try:
+            K = round((a * b * (1 - b) / c) * -1, 2)
+            C.append(K)
+        except ZeroDivisionError:
+            a = 2
+            c = 2
+            K = round((a * b * (1 - b) / c) * -1, 2)
+            C.append(K)
     return(C)
 
 # Function to select 1st CSV file -------------------------------------------------------------------------------------------------------
@@ -49,6 +55,7 @@ def browseFiles2():
 # Function to generate graph data using both selected files ------------------------------------------------------------------------------
 
 def genGraph():
+    
     csvFile1 = pd.read_csv(filename1) # Place the contents of file 1 into a variable
     month = csvFile1['Date'].tolist() # Extract 1st column data into a list
     pop1 = csvFile1['Population'].tolist() # Extract 2nd Column data to a list
@@ -88,7 +95,7 @@ def genGraph():
     plt.xlabel('Month') # Axis labels
     plt.ylabel('Population')
 
-    plt.legend() # Display graph legend
+    plt.legend(loc="upper right") # Display graph legend
 
     plt.show() # Display graph
 
