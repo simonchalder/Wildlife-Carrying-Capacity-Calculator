@@ -55,54 +55,86 @@ def browseFiles2():
 # Function to generate graph data using both selected files ------------------------------------------------------------------------------
 
 def genGraph():
-    
-    csvFile1 = pd.read_csv(filename1) # Place the contents of file 1 into a variable
-    month = csvFile1['Date'].tolist() # Extract 1st column data into a list
-    pop1 = csvFile1['Population'].tolist() # Extract 2nd Column data to a list
+    print(check_var)
+    if check_var.get() == 1:
+        csvFile1 = pd.read_csv(filename1) # Place the contents of file 1 into a variable
+        month = csvFile1['Date'].tolist() # Extract 1st column data into a list
+        pop1 = csvFile1['Population'].tolist() # Extract 2nd Column data to a list
 
-    csvFile2 = pd.read_csv(filename2) # As above for file 2
-    month = csvFile2['Date'].tolist()
-    pop2 = csvFile2['Population'].tolist()
+        csvFile2 = pd.read_csv(filename2) # As above for file 2
+        month = csvFile2['Date'].tolist()
+        pop2 = csvFile2['Population'].tolist()
 
-    pc1 = population_change(pop1) # Run pop1 list through population_change function to create a list of changes
-    lastpcval1 = pc1[-1] # get the last value in the list
-    pc1.append(lastpcval1) # Append the last value again to the list as the list will have 1 fewer entries than the population list
-    
-    pc2 = population_change(pop2) # As above for pop2
-    lastpcval2 = pc2[-1]
-    pc2.append(lastpcval2)
+        pc1 = population_change(pop1) # Run pop1 list through population_change function to create a list of changes
+        lastpcval1 = pc1[-1] # get the last value in the list
+        pc1.append(lastpcval1) # Append the last value again to the list as the list will have 1 fewer entries than the population list
+        
+        pc2 = population_change(pop2) # As above for pop2
+        lastpcval2 = pc2[-1]
+        pc2.append(lastpcval2)
 
-    gr1 = growth_rate(pop1) # Run pop1 through the growth_rate function to calculate growth rate and generate a new list
-    lastgrval1 = gr1[-1] # Get the last value in the list
-    gr1.append(lastgrval1) # Append the last value again to the list as the list will have 1 fewer entries than the population list
+        gr1 = growth_rate(pop1) # Run pop1 through the growth_rate function to calculate growth rate and generate a new list
+        lastgrval1 = gr1[-1] # Get the last value in the list
+        gr1.append(lastgrval1) # Append the last value again to the list as the list will have 1 fewer entries than the population list
 
-    gr2 = growth_rate(pop2) # As above
-    lastgrval2 = gr2[-1]
-    gr2.append(lastgrval2)
+        gr2 = growth_rate(pop2) # As above
+        lastgrval2 = gr2[-1]
+        gr2.append(lastgrval2)
 
-    carry_capacity1 = calc_car_cap(gr1, pop1, pc1) # Perform Carrying capacity calculation on species from file 1 using gr, pop1 and pc lists generated above
+        carry_capacity1 = calc_car_cap(gr1, pop1, pc1) # Perform Carrying capacity calculation on species from file 1 using gr, pop1 and pc lists generated above
 
-    carry_capacity2 = calc_car_cap(gr2, pop2, pc2) # As above for species in file 2
-    
-    plt.plot(month,pop1, label = "Grey Squirrels") # Plot data from file 1 population numbers
+        carry_capacity2 = calc_car_cap(gr2, pop2, pc2) # As above for species in file 2
+        
+        species1 = input1.get()
+        species2 = input2.get()
 
-    plt.plot(month,pop2, label = "Pine Martens", color = "green") # Plot data from file 2 population numbers
+        plt.plot(month,pop1, label = species1) # Plot data from file 1 population numbers
 
-    plt.plot(month,carry_capacity1, label = "Squirrel Carrying Capacity", color = "red", linestyle = 'dotted') # Plot carrying capacity data for species 1
+        plt.plot(month,pop2, label = species2, color = "green") # Plot data from file 2 population numbers
 
-    plt.plot(month,carry_capacity2, label = "Pine Marten Carrying Capacity", color = "orange", linestyle = 'dotted') # Plot carrying capacity data for species 2
+        plt.plot(month,carry_capacity1, label = species1 + " Carrying Capacity", color = "red", linestyle = 'dotted') # Plot carrying capacity data for species 1
 
-    plt.xlabel('Month') # Axis labels
-    plt.ylabel('Population')
+        plt.plot(month,carry_capacity2, label = species2 + " Carrying Capacity", color = "orange", linestyle = 'dotted') # Plot carrying capacity data for species 2
 
-    plt.legend(loc="upper right") # Display graph legend
+        plt.xlabel('Month') # Axis labels
+        plt.ylabel('Population')
 
-    plt.show() # Display graph
+        plt.legend(loc="upper right") # Display graph legend
+
+        plt.show() # Display graph
+
+    else:
+        csvFile1 = pd.read_csv(filename1) # Place the contents of file 1 into a variable
+        month = csvFile1['Date'].tolist() # Extract 1st column data into a list
+        pop1 = csvFile1['Population'].tolist() # Extract 2nd Column data to a list
+
+        pc1 = population_change(pop1) # Run pop1 list through population_change function to create a list of changes
+        lastpcval1 = pc1[-1] # get the last value in the list
+        pc1.append(lastpcval1) # Append the last value again to the list as the list will have 1 fewer entries than the population list
+
+        gr1 = growth_rate(pop1) # Run pop1 through the growth_rate function to calculate growth rate and generate a new list
+        lastgrval1 = gr1[-1] # Get the last value in the list
+        gr1.append(lastgrval1) # Append the last value again to the list as the list will have 1 fewer entries than the population list
+
+        carry_capacity1 = calc_car_cap(gr1, pop1, pc1) # Perform Carrying capacity calculation on species from file 1 using gr, pop1 and pc lists generated above
+        
+        species1 = input1.get()
+
+        plt.plot(month,pop1, label = species1) # Plot data from file 1 population numbers
+
+        plt.plot(month,carry_capacity1, label = species1 + " Carrying Capacity", color = "red", linestyle = 'dotted') # Plot carrying capacity data for species 1
+
+        plt.xlabel('Month') # Axis labels
+        plt.ylabel('Population')
+
+        plt.legend(loc="upper right") # Display graph legend
+
+        plt.show() # Display graph
 
 # Tkinter Frontend Code -----------------------------------------------------------------------------------------------------------------
 
 root = Tk()
-root.geometry('400x320+300+100')
+root.geometry('400x360+300+100')
 root.title("W3C by Simon Chalder")
 
 # List Creation -------------------------------------------------------------------------------------------------------------------------
@@ -122,11 +154,23 @@ button.pack(padx=5, pady=5)
 label = Label(root, text="") 
 label.pack(padx=5, pady=5)
 
+input1 = Entry(root, text="Species 1: ")
+input1.insert(0, 'Species 1')
+input1.pack(padx=5, pady=5)
+
+check_var = IntVar()
+cb1 = Checkbutton(root, text="Check for 2 Species", variable = check_var, onvalue=1, offvalue=0)
+cb1.pack(padx=5, pady=5)
+
 button2 = Button(root, text='Select file 2', command=browseFiles2)
 button2.pack(padx=5, pady=5)
 
 label2 = Label(root, text="")
-label2.pack(padx=5, pady=5)
+label2.pack(padx=5)
+
+input2 = Entry(root, text="Species 2: ")
+input2.insert(0, 'Species 2')
+input2.pack(padx=5, pady=5)
 
 button3 = Button(root, text='Generate Graph', command=genGraph)
 button3.pack(padx=5, pady=5)
