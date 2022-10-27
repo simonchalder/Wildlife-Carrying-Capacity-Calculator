@@ -96,6 +96,8 @@ def genGraph():
 
         plt.plot(month,carry_capacity2, label = species2 + " Carrying Capacity", color = "orange", linestyle = 'dotted') # Plot carrying capacity data for species 2
 
+        plt.title(species1 + " vs " + species1)
+
         plt.xlabel('Month') # Axis labels
         plt.ylabel('Population')
 
@@ -121,9 +123,9 @@ def genGraph():
         species1 = input1.get()
 
         plt.plot(month,pop1, label = species1) # Plot data from file 1 population numbers
-
+        plt.title(species1)
         plt.plot(month,carry_capacity1, label = species1 + " Carrying Capacity", color = "red", linestyle = 'dotted') # Plot carrying capacity data for species 1
-
+        plt.grid(True)
         plt.xlabel('Month') # Axis labels
         plt.ylabel('Population')
 
@@ -134,7 +136,7 @@ def genGraph():
 # Tkinter Frontend Code -----------------------------------------------------------------------------------------------------------------
 
 root = Tk()
-root.geometry('400x360+300+100')
+root.geometry('530x350+330+100')
 root.title("W3C by Simon Chalder")
 
 # List Creation -------------------------------------------------------------------------------------------------------------------------
@@ -146,36 +148,39 @@ pop2 = ()
 # Tkinter GUI Layout
 
 titlelabel = Label(root, text="W3C by Simon Chalder", padx=50, pady=25) 
-titlelabel.pack()
+titlelabel.grid(column=0, row=1)
 
-button = Button(root, text='Select file 1', command=browseFiles1)
-button.pack(padx=5, pady=5)
+frame1 = Frame(root)
+frame1.grid(column=0, row=2)
 
-label = Label(root, text="") 
-label.pack(padx=5, pady=5)
+button = Button(frame1, text='Select file 1', command=browseFiles1)
+button.grid(column=0, row=2, padx=5, pady=5)
 
-input1 = Entry(root, text="Species 1: ")
+label = Label(frame1, text="") 
+label.grid(column=0, row=3, padx=5, pady=5)
+
+input1 = Entry(frame1, text="Species 1: ")
 input1.insert(0, 'Species 1')
-input1.pack(padx=5, pady=5)
+input1.grid(column=2, row=2, padx=5, pady=5)
 
 check_var = IntVar()
-cb1 = Checkbutton(root, text="Check for 2 Species", variable = check_var, onvalue=1, offvalue=0)
-cb1.pack(padx=5, pady=5)
+cb1 = Checkbutton(frame1, text="Check for 2 Species", variable = check_var, onvalue=1, offvalue=0)
+cb1.grid(column=0, row=4, padx=5, pady=5)
 
-button2 = Button(root, text='Select file 2', command=browseFiles2)
-button2.pack(padx=5, pady=5)
+button2 = Button(frame1, text='Select file 2', command=browseFiles2)
+button2.grid(column=0, row=5, padx=5, pady=5)
 
-label2 = Label(root, text="")
-label2.pack(padx=5)
+label2 = Label(frame1, text="")
+label2.grid(column=0, row=6, padx=5)
 
-input2 = Entry(root, text="Species 2: ")
+input2 = Entry(frame1, text="Species 2: ")
 input2.insert(0, 'Species 2')
-input2.pack(padx=5, pady=5)
+input2.grid(column=2, row=5, padx=5, pady=5)
 
-button3 = Button(root, text='Generate Graph', command=genGraph)
-button3.pack(padx=5, pady=5)
+button3 = Button(frame1, text='Generate Graph', command=genGraph)
+button3.grid(column=1, row=7, padx=5, pady=5)
 
 footlabel = Label(root, text="Distributed under the MIT License - Copyright (c) 2022 Simon Chalder", padx=50, pady=25) 
-footlabel.pack(padx=5)
+footlabel.grid(column=0, row=3,padx=5)
 
 root.mainloop()
