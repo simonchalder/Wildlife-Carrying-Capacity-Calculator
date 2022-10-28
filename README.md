@@ -8,7 +8,7 @@ This simple software provides a way to compare and contrast the population numbe
 
 ![1](https://user-images.githubusercontent.com/66743889/198626975-05262b6c-e0fc-4a86-ac39-0556f008b8e6.png)
 ![2](https://user-images.githubusercontent.com/66743889/198627101-348ab6d2-93b8-4d5a-8d9f-6b5904d38a5b.png)
-![3](https://user-images.githubusercontent.com/66743889/198627137-92fdd145-0b3e-4f2b-acdc-4bc54b51b57a.png)
+![3](https://user-images.githubusercontent.com/66743889/198628583-bf71656d-a20a-405b-81d2-1cc188e5cd1b.png)
 
 ## Usage
 
