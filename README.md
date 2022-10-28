@@ -6,9 +6,9 @@ This simple software provides a way to compare and contrast the population numbe
 
 ## Screenshots
 
-![1](https://user-images.githubusercontent.com/66743889/198053376-356970c9-ee1d-4140-b5c5-92316ef642d8.png)
-![2](https://user-images.githubusercontent.com/66743889/198053378-34729e86-a8cb-4416-b239-66740e7d590a.png)
-![3](https://user-images.githubusercontent.com/66743889/198073180-8b5bce0d-8c08-4068-85df-6436e094054f.png)
+![1](https://user-images.githubusercontent.com/66743889/198626975-05262b6c-e0fc-4a86-ac39-0556f008b8e6.png)
+![2](https://user-images.githubusercontent.com/66743889/198627101-348ab6d2-93b8-4d5a-8d9f-6b5904d38a5b.png)
+![3](https://user-images.githubusercontent.com/66743889/198627137-92fdd145-0b3e-4f2b-acdc-4bc54b51b57a.png)
 
 ## Usage
 
@@ -16,9 +16,9 @@ Currently the software requires some data preperation work to be completed prior
 
 ## TO-DO
 
-- [ ]  Improvements to error handling and testing
+- [x]  Improvements to error handling and testing
 - [x]  Remove Zero Division Error for float values
 - [ ]  Adjust data inputs to match actual population datasets
 - [x]  Add the ability to add custom axis labels
 - [ ]  Add the ability to autogenerate plot labels from csv files
-- [ ]  Improve graph appearance and behaviour - improve axis markings and custom titles
+- [x]  Improve graph appearance and behaviour - improve axis markings and custom titles
