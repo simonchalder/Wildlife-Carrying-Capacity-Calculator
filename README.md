@@ -6,9 +6,9 @@ This simple software provides a way to compare and contrast the population numbe
 
 ## Screenshots
 
-![1](https://user-images.githubusercontent.com/66743889/198626975-05262b6c-e0fc-4a86-ac39-0556f008b8e6.png)
-![2](https://user-images.githubusercontent.com/66743889/198627101-348ab6d2-93b8-4d5a-8d9f-6b5904d38a5b.png)
-![3](https://user-images.githubusercontent.com/66743889/198628583-bf71656d-a20a-405b-81d2-1cc188e5cd1b.png)
+![1](https://user-images.githubusercontent.com/66743889/198642071-888c19c9-d7e3-4076-9475-876a66940cd5.png)
+![2](https://user-images.githubusercontent.com/66743889/198642158-1b71e296-fb77-4aea-af68-40fe9eba0368.png)
+![3](https://user-images.githubusercontent.com/66743889/198642189-4e266699-126e-4dd8-afff-72d7b9668c84.png)
 
 ## Usage
 
