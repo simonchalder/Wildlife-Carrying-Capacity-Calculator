@@ -18,7 +18,7 @@ Currently the software requires some data preperation work to be completed prior
 
 - [x]  Improvements to error handling and testing
 - [x]  Remove Zero Division Error for float values
-- [ ]  Adjust data inputs to match actual population datasets
+- [x]  Test with real life population datasets
 - [x]  Add the ability to add custom axis labels
 - [ ]  Add the ability to autogenerate plot labels from csv files
 - [x]  Improve graph appearance and behaviour - improve axis markings and custom titles
