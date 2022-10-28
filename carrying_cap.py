@@ -98,7 +98,11 @@ def genGraph():
         # plt.xticks(numpy.arange(0, len(month), 1))
         # plt.yticks(numpy.arange(0, max(pop1), 100))
 
-        plt.title(species1 + " vs " + species1)
+        if title_entry.get() == '':
+            plt.title(species1 + " vs " + species2)
+        else:
+            title = title_entry.get()
+            plt.title(title)
         
         plt.grid(True)
         
@@ -126,7 +130,11 @@ def genGraph():
         
         species1 = input1.get()
         
-        plt.title(species1)
+        if title_entry.get() == '':
+            plt.title(species1)
+        else:
+            title = title_entry.get()
+            plt.title(title)
         
         plt.plot(month,pop1, label = species1) # Plot data from file 1 population numbers
         
@@ -144,7 +152,7 @@ def genGraph():
 # Tkinter Frontend Code -----------------------------------------------------------------------------------------------------------------
 
 root = Tk()
-root.geometry('480x550+330+100')
+root.geometry('480x610+330+100')
 root.title("W3C by Simon Chalder")
 
 # List Creation -------------------------------------------------------------------------------------------------------------------------
@@ -156,8 +164,8 @@ pop2 = ()
 # Tkinter GUI Layout
 
 # Title ------------------------------------------------------------------------------------------
-titlelabel = Label(root, text="W3C by Simon Chalder", padx=50, pady=25) 
-titlelabel.grid(column=0, row=1)
+app_titlelabel = Label(root, text="W3C by Simon Chalder", padx=50, pady=25) 
+app_titlelabel.grid(column=0, row=1)
 
 # Container Frame --------------------------------------------------------------------------------
 
@@ -166,7 +174,7 @@ container_frame.grid(column=0, row=2)
 
 # Frame 1 ----------------------------------------------------------------------------------------
 
-frame1 = LabelFrame(container_frame, text="Select First File")
+frame1 = LabelFrame(container_frame, text="1: Select First File")
 frame1.grid(column=0, row=2, padx=10, pady=5)
 
 button = Button(frame1, text='Select File', command=browseFiles1)
@@ -181,12 +189,12 @@ input1.grid(column=3, row=2, padx=80, pady=5)
 
 # Frame 2 ----------------------------------------------------------------------------------------
 
-frame2 = LabelFrame(container_frame, text="Options")
-frame2.grid(column=0, row=3, ipady=5, pady=5)
+frame2 = LabelFrame(container_frame, text="2: Options")
+frame2.grid(column=0, row=3, ipady=5, ipadx=30, pady=5, padx=10)
 
 check_var = IntVar()
 
-cb1 = Checkbutton(frame2, text="Check to compare 2 Species", variable = check_var, onvalue=1, offvalue=0)
+cb1 = Checkbutton(frame2, text="2: Check to compare 2 Species", variable = check_var, onvalue=1, offvalue=0)
 cb1.grid(column=0, row=1, padx=10)
 
 om_var = StringVar()
@@ -197,7 +205,7 @@ om.grid(column=1, row=1, padx=17.5, ipadx=30)
 
 # Frame 3 ----------------------------------------------------------------------------------------
 
-frame3 = LabelFrame(container_frame, text="Select Second File")
+frame3 = LabelFrame(container_frame, text="3: Select Second File")
 frame3.grid(column=0, row=4, padx=10, pady=5)
 
 button2 = Button(frame3, text='Select file 2', command=browseFiles2)
@@ -210,10 +218,18 @@ input2 = Entry(frame3, text="Species 2: ")
 input2.insert(0, 'Species 2')
 input2.grid(column=2, row=1, padx=80, pady=5)
 
+# Optional Title Frame ----------------------------------------------------------------------------
+
+title_label_frame = LabelFrame(container_frame, text="4: (Optional) - Add Graph Title")
+title_label_frame.grid(column=0, row=5, ipadx=10)
+
+title_entry = Entry(title_label_frame, text='')
+title_entry.grid(column=0, row=1, padx=10, pady=10, ipadx=140)
+
 # Frame 4 -----------------------------------------------------------------------------------------
 
-frame4 = LabelFrame(container_frame, text="Generate")
-frame4.grid(column=0, row=5, padx=10, pady=5)
+frame4 = LabelFrame(container_frame, text="5: Generate")
+frame4.grid(column=0, row=6, padx=10, pady=5)
 
 button3 = Button(frame4, text='Generate Graph', command=genGraph)
 button3.grid(column=1, row=1, ipadx=30, ipady=10, padx=145, pady=15)
