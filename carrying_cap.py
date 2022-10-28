@@ -30,11 +30,10 @@ def calc_car_cap(r,N,cp):
     for a, b, c in itertools.zip_longest(r, N, cp):
         try:
             K = round((a * b * (1 - b) / c) * -1, 2)
+            # K = b / 1 - (c / a * b) * -1
             C.append(K)
-        except ZeroDivisionError:
-            a = 2
-            c = 2
-            K = round((a * b * (1 - b) / c) * -1, 2)
+        except ZeroDivisionError:           
+            K = C[-1]
             C.append(K)
     return(C)
 
@@ -96,9 +95,14 @@ def genGraph():
 
         plt.plot(month,carry_capacity2, label = species2 + " Carrying Capacity", color = "orange", linestyle = 'dotted') # Plot carrying capacity data for species 2
 
-        plt.title(species1 + " vs " + species1)
+        # plt.xticks(numpy.arange(0, len(month), 1))
+        # plt.yticks(numpy.arange(0, max(pop1), 100))
 
-        plt.xlabel('Month') # Axis labels
+        plt.title(species1 + " vs " + species1)
+        
+        plt.grid(True)
+        
+        plt.xlabel(om_var.get()) # Axis labels # Axis labels
         plt.ylabel('Population')
 
         plt.legend(loc="upper right") # Display graph legend
@@ -121,12 +125,16 @@ def genGraph():
         carry_capacity1 = calc_car_cap(gr1, pop1, pc1) # Perform Carrying capacity calculation on species from file 1 using gr, pop1 and pc lists generated above
         
         species1 = input1.get()
-
-        plt.plot(month,pop1, label = species1) # Plot data from file 1 population numbers
+        
         plt.title(species1)
+        
+        plt.plot(month,pop1, label = species1) # Plot data from file 1 population numbers
+        
         plt.plot(month,carry_capacity1, label = species1 + " Carrying Capacity", color = "red", linestyle = 'dotted') # Plot carrying capacity data for species 1
+        
         plt.grid(True)
-        plt.xlabel('Month') # Axis labels
+        
+        plt.xlabel(om_var.get()) # Axis labels
         plt.ylabel('Population')
 
         plt.legend(loc="upper right") # Display graph legend
@@ -136,7 +144,7 @@ def genGraph():
 # Tkinter Frontend Code -----------------------------------------------------------------------------------------------------------------
 
 root = Tk()
-root.geometry('530x350+330+100')
+root.geometry('480x550+330+100')
 root.title("W3C by Simon Chalder")
 
 # List Creation -------------------------------------------------------------------------------------------------------------------------
@@ -147,38 +155,68 @@ pop2 = ()
 
 # Tkinter GUI Layout
 
+# Title ------------------------------------------------------------------------------------------
 titlelabel = Label(root, text="W3C by Simon Chalder", padx=50, pady=25) 
 titlelabel.grid(column=0, row=1)
 
-frame1 = Frame(root)
-frame1.grid(column=0, row=2)
+# Container Frame --------------------------------------------------------------------------------
 
-button = Button(frame1, text='Select file 1', command=browseFiles1)
-button.grid(column=0, row=2, padx=5, pady=5)
+container_frame = Frame(root)
+container_frame.grid(column=0, row=2)
+
+# Frame 1 ----------------------------------------------------------------------------------------
+
+frame1 = LabelFrame(container_frame, text="Select First File")
+frame1.grid(column=0, row=2, padx=10, pady=5)
+
+button = Button(frame1, text='Select File', command=browseFiles1)
+button.grid(column=0, row=2, columnspan=2, ipadx=30, ipady=10, padx=15, pady=15)
 
 label = Label(frame1, text="") 
-label.grid(column=0, row=3, padx=5, pady=5)
+label.grid(column=1, row=3, columnspan=3)
 
 input1 = Entry(frame1, text="Species 1: ")
 input1.insert(0, 'Species 1')
-input1.grid(column=2, row=2, padx=5, pady=5)
+input1.grid(column=3, row=2, padx=80, pady=5)
+
+# Frame 2 ----------------------------------------------------------------------------------------
+
+frame2 = LabelFrame(container_frame, text="Options")
+frame2.grid(column=0, row=3, ipady=5, pady=5)
 
 check_var = IntVar()
-cb1 = Checkbutton(frame1, text="Check for 2 Species", variable = check_var, onvalue=1, offvalue=0)
-cb1.grid(column=0, row=4, padx=5, pady=5)
 
-button2 = Button(frame1, text='Select file 2', command=browseFiles2)
-button2.grid(column=0, row=5, padx=5, pady=5)
+cb1 = Checkbutton(frame2, text="Check to compare 2 Species", variable = check_var, onvalue=1, offvalue=0)
+cb1.grid(column=0, row=1, padx=10)
 
-label2 = Label(frame1, text="")
-label2.grid(column=0, row=6, padx=5)
+om_var = StringVar()
 
-input2 = Entry(frame1, text="Species 2: ")
+om_var.set("X Axis")
+om = OptionMenu(frame2, om_var, "Month", " Year  ", " Day   ")
+om.grid(column=1, row=1, padx=17.5, ipadx=30)
+
+# Frame 3 ----------------------------------------------------------------------------------------
+
+frame3 = LabelFrame(container_frame, text="Select Second File")
+frame3.grid(column=0, row=4, padx=10, pady=5)
+
+button2 = Button(frame3, text='Select file 2', command=browseFiles2)
+button2.grid(column=0, row=1, columnspan=2, ipadx=30, ipady=10, padx=15, pady=15)
+
+label2 = Label(frame3, text="")
+label2.grid(column=1, row=2, columnspan=3)
+
+input2 = Entry(frame3, text="Species 2: ")
 input2.insert(0, 'Species 2')
-input2.grid(column=2, row=5, padx=5, pady=5)
+input2.grid(column=2, row=1, padx=80, pady=5)
 
-button3 = Button(frame1, text='Generate Graph', command=genGraph)
-button3.grid(column=1, row=7, padx=5, pady=5)
+# Frame 4 -----------------------------------------------------------------------------------------
+
+frame4 = LabelFrame(container_frame, text="Generate")
+frame4.grid(column=0, row=5, padx=10, pady=5)
+
+button3 = Button(frame4, text='Generate Graph', command=genGraph)
+button3.grid(column=1, row=1, ipadx=30, ipady=10, padx=145, pady=15)
 
 footlabel = Label(root, text="Distributed under the MIT License - Copyright (c) 2022 Simon Chalder", padx=50, pady=25) 
 footlabel.grid(column=0, row=3,padx=5)
